@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow_100">#59FFF59F</color>
+    <color name="red_tomato">#EB4444</color>
+    <color name="yellow_fruits">#FFF068</color>
+    <color name="pink_meat">#E897A0</color>
+    <color name="purple_bakery">#F3B3FE</color>
+    <color name="blue_dairy">#94F8FE</color>
+    <color name="green_dryncanned">#A6F482</color>
+    <color name="purple_beverages">#B59BFF</color>
+    <color name="orange_snacks">#FFEEBB</color>
+    <color name="green_background">#77E275</color>
+    <color name="red_buttonColor">#DE8383</color>
+    <color name="transparency_whit">#D9FFFFFF</color>
+</resources>

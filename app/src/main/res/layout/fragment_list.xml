@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/white"
+    tools:context=".main.Fragments.ListFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/creation_TXT_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:textColor="@color/black" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myList_TXT_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_below="@id/creation_TXT_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/myList_TXT_name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Item Name:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/myList_TXT_price"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Price:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/myList_TXT_name"
+            app:layout_constraintTop_toTopOf="@id/myList_TXT_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/myList_TXT_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/myList_TXT_price"
+            app:layout_constraintTop_toTopOf="@id/myList_TXT_price" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/creation_RV_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/myList_TXT_subtitle"
+        android:layout_above="@id/creation_BTN_clear"
+        tools:listitem="@layout/my_list_item"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/creation_BTN_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Clear"
+        android:textColor="@color/black"
+        android:elevation="10dp"
+        android:background="@drawable/rounded_button_corners"
+        android:layout_alignParentBottom="true"/>
+.
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/creation_BTN_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Save to My List"
+        android:textColor="@color/black"
+        android:background="@drawable/rounded_button_corners"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

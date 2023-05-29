@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/background_supermarket"
+    tools:context=".main.Fragments.ListFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/creation_TXT_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:textColor="@color/black" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/category_TXT_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_below="@id/creation_TXT_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/category_TXT_name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Item Name:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/category_TXT_price"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Price:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/category_TXT_name"
+            app:layout_constraintTop_toTopOf="@id/category_TXT_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/category_TXT_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/category_TXT_price"
+            app:layout_constraintTop_toTopOf="@id/category_TXT_price" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/creation_RV_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/category_TXT_subtitle"
+        android:background="@color/transparency_whit"
+        tools:listitem="@layout/category_item"/>
+
+</RelativeLayout>

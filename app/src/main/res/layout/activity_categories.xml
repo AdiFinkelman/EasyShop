@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_100"
+    tools:context=".main.Models.CategoriesActivity">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/categories_background_supermarket"
+        android:layout_width="match_parent"
+        android:layout_height="232dp"
+        android:layout_alignBottom="@+id/categories_background_green"
+        android:layout_marginBottom="-145dp"
+        android:src="@drawable/background_supermarket" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/categories_background_green"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="-20dp"
+        android:elevation="8dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/green_background">
+
+        <RelativeLayout
+            android:id="@+id/background_LAYOUT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:text="Categories"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                tools:fontFamily="monospace"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="125dp"
+                android:layout_height="35dp"
+                android:padding="8dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/easy_shop" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_vegetables"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/categories_background_supermarket"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="70dp"
+        app:cardBackgroundColor="@color/red_tomato">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category1_icon"
+                android:layout_width="80dp"
+                android:layout_height="81dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/tomato_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category1_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Vegetables"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_butchery"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/category_vegetables"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
+        app:cardBackgroundColor="@color/pink_meat">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category2_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/meat_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category2_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category2_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Butchery"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_dairy"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/category_butchery"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
+        app:cardBackgroundColor="@color/blue_dairy">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category3_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/dairy_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category3_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category3_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Dairy"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_beverages"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/category_dairy"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
+        app:cardBackgroundColor="@color/purple_beverages">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category4_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/beverages_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category4_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category4_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Beverages"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_fruits"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/categories_background_supermarket"
+        android:layout_marginTop="160dp"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true"
+        app:cardBackgroundColor="@color/yellow_fruits">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category5_icon"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/orangefruit_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category5_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category5_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Fruits"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_bakery"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/category_fruits"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true"
+        app:cardBackgroundColor="@color/purple_bakery">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category6_icon"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/bakery_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category6_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category6_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Bakery"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_dryncanned"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/category_bakery"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true"
+        app:cardBackgroundColor="@color/green_dryncanned">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category7_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/dry_and_canned_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category7_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category7_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Dry &amp; Canned"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_snacks"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/category_dryncanned"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true"
+        app:cardBackgroundColor="@color/orange_snacks">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/category8_icon"
+                android:layout_width="82dp"
+                android:layout_height="81dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/snacks_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category8_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category8_icon"
+                android:layout_centerHorizontal="true"
+                android:text="Snacks"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

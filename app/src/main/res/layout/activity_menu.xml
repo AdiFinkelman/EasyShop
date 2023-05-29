@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.Models.MenuActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/menu_roof"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        app:srcCompat="@drawable/shop_roof" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="390dp"
+        android:layout_height="364dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/market" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="160dp"
+        app:srcCompat="@drawable/easy_shop" />
+
+    <FrameLayout
+        android:id="@+id/menu_BTN1"
+        android:layout_width="241dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="220dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/create_menu_BTN"
+            android:contentDescription="Open Create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_in_menu" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/menu_create_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@drawable/create_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_create_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:text="Create"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            android:textStyle="normal"
+            app:fontFamily="sans-serif-condensed-medium" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/menu_BTN2"
+        android:layout_width="241dp"
+        android:layout_height="88dp"
+        android:layout_below="@id/menu_BTN1"
+        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/myList_menu_BTN"
+            android:contentDescription="Open My List"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_in_menu" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/menu_myList_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@drawable/cart" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_myList_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:text="My List"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            android:textStyle="normal"
+            app:fontFamily="sans-serif-condensed-medium" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/menu_BTN3"
+        android:layout_width="241dp"
+        android:layout_height="88dp"
+        android:layout_below="@id/menu_BTN2"
+        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/map_menu_BTN"
+            android:contentDescription="Open Map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_in_menu" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/menu_map_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@drawable/map_marker_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_map_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:text="Map"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            android:textStyle="normal"
+            app:fontFamily="sans-serif-condensed-medium" />
+
+    </FrameLayout>
+
+</RelativeLayout>
