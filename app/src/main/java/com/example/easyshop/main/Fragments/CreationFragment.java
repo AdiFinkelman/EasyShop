@@ -1,14 +1,12 @@
 package com.example.easyshop.main.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
@@ -17,8 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshop.R;
 import com.example.easyshop.main.Adapters.CreatingAdapter;
+import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Models.CreationList;
+import com.example.easyshop.main.Models.CategoryList;
 import com.example.easyshop.main.Models.Item;
 
 import java.util.ArrayList;
@@ -27,10 +26,11 @@ public class CreationFragment extends Fragment {
 
     private RecyclerView creation_RV_list;
     private AppCompatTextView creation_TXT_title;
-    private CreationList creationList;
-    private static ArrayList<Item> category = new ArrayList<>();
+    private CategoryList categoryList;
+    private static ArrayList<Item> category;
     private int categoryType;
     Spinner spinner;
+    private Spinner_Callback spinner_callback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,9 +47,9 @@ public class CreationFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        creationList = new CreationList(category);
+        categoryList = new CategoryList(category);
         creation_TXT_title.setText(getCategoryName(categoryType));
-        CreatingAdapter creatingAdapter = new CreatingAdapter(creationList);
+        CreatingAdapter creatingAdapter = new CreatingAdapter(categoryList, spinner_callback);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         creation_RV_list.setAdapter(creatingAdapter);
@@ -69,9 +69,9 @@ public class CreationFragment extends Fragment {
     }
 
     private void findViews(View view) {
-        creation_RV_list = view.findViewById(DataManager.getCreation_rv_list());
+        creation_RV_list = view.findViewById(DataManager.getCreation_RV_list());
         creation_TXT_title = view.findViewById(DataManager.getCreation_TXT_title());
-        spinner = view.findViewById(R.id.popup_Spinner_quantity);
+        spinner = view.findViewById(DataManager.getSpinner_quantity());
     }
 
     private void getCategoryType() {
@@ -79,7 +79,6 @@ public class CreationFragment extends Fragment {
     }
 
     public static void initCategories() {
-        clearCategories();
         category = DataManager.getCategory();
     }
 
@@ -94,8 +93,8 @@ public class CreationFragment extends Fragment {
         category = filteredCategory;
     }
 
-    public static void clearCategories() {
-        category.clear();
+    public void setSpinner_callback(Spinner_Callback spinner_callback) {
+        this.spinner_callback = spinner_callback;
     }
 
 //    @Override

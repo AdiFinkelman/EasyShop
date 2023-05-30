@@ -19,14 +19,14 @@
         android:textColor="@color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/category_TXT_subtitle"
+        android:id="@+id/creation_TXT_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_below="@id/creation_TXT_title">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/category_TXT_name"
+            android:id="@+id/creation_TXT_name"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Item Name:"
@@ -37,26 +37,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/category_TXT_price"
+            android:id="@+id/creation_TXT_price"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Price:"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20dp"
-            app:layout_constraintStart_toEndOf="@id/category_TXT_name"
-            app:layout_constraintTop_toTopOf="@id/category_TXT_name" />
+            app:layout_constraintStart_toEndOf="@id/creation_TXT_name"
+            app:layout_constraintTop_toTopOf="@id/creation_TXT_name" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/category_TXT_quantity"
+            android:id="@+id/creation_TXT_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity:"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20dp"
-            app:layout_constraintStart_toEndOf="@id/category_TXT_price"
-            app:layout_constraintTop_toTopOf="@id/category_TXT_price" />
+            app:layout_constraintStart_toEndOf="@id/creation_TXT_price"
+            app:layout_constraintTop_toTopOf="@id/creation_TXT_price" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/category_TXT_subtitle"
+        android:layout_below="@id/creation_TXT_subtitle"
         android:background="@color/transparency_whit"
         tools:listitem="@layout/category_item"/>
 

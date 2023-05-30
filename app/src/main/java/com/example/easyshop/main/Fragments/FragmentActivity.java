@@ -6,13 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.easyshop.R;
+import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
 import com.example.easyshop.main.Models.CategoriesActivity;
+import com.example.easyshop.main.Models.Item;
 import com.example.easyshop.main.Models.MenuActivity;
 
 public class FragmentActivity extends AppCompatActivity {
     private CreationFragment creationFragment;
     private ListFragment listFragment;
+
+    Spinner_Callback spinner_callback = new Spinner_Callback() {
+        @Override
+        public void spinnerClicked(Item selectedItem) {
+            listFragment.addItem(selectedItem);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +29,7 @@ public class FragmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
 
         initFragments();
+        creationFragment.setSpinner_callback(spinner_callback);
         beginTransactions();
     }
 
@@ -43,4 +53,8 @@ public class FragmentActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+//    public void addItem(Item selectedItem) {
+//        listFragment.spinnerClicked(selectedItem);
+//    }
 }

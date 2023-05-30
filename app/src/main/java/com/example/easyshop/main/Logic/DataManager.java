@@ -22,14 +22,24 @@ public class DataManager {
     private static final int category_snacks = R.id.category_snacks;
 
     //creationFragment
-    private static final int creation_rv_list = R.id.creation_RV_list;
+    private static final int creation_RV_list = R.id.creation_RV_list;
     private static final int creation_TXT_title = R.id.creation_TXT_title;
     private static ArrayList<Item> category = new ArrayList<>();
 
     //Category Item
-    private static final int category_TXT_name = R.id.category_TXT_name;
-    private static final int category_TXT_price = R.id.category_TXT_price;
+    private static final int categoryItem_TXT_name = R.id.categoryItem_TXT_name;
+    private static final int categoryItem_TXT_price = R.id.categoryItem_TXT_price;
     private static final int spinner_quantity = R.id.popup_Spinner_quantity;
+
+    //My List Item
+    private static final int myListItem_TXT_name = R.id.myListItem_TXT_name;
+    private static final int myListItem_TXT_price = R.id.myListItem_TXT_price;
+    private static final int myListItem_TXT_quantity = R.id.myListItem_TXT_quantity;
+
+    //ListFragment
+    private static final int myList_RV_list = R.id.myList_RV_list;
+    private static final int creation_BTN_clear = R.id.creation_BTN_clear;
+    private static final int creation_btn_save = R.id.creation_BTN_save;
 
     public static int getCreate_menu_BTN() { return create_menu_BTN; }
 
@@ -46,14 +56,26 @@ public class DataManager {
     public static int getCategory_dry_and_canned() { return category_dry_and_canned; }
     public static int getCategory_snacks() { return category_snacks; }
 
-    public static int getCreation_rv_list() { return creation_rv_list; }
+    public static int getCreation_RV_list() { return creation_RV_list; }
     public static int getCreation_TXT_title() { return creation_TXT_title; }
 
-    public static int getCategory_TXT_name() { return category_TXT_name; }
+    public static int getCategoryItem_TXT_name() { return categoryItem_TXT_name; }
 
-    public static int getCategory_TXT_price() { return category_TXT_price; }
+    public static int getCategoryItem_TXT_price() { return categoryItem_TXT_price; }
 
     public static int getSpinner_quantity() { return spinner_quantity; }
+
+    public static int getMyList_RV_list() { return myList_RV_list; }
+
+    public static int getCreation_BTN_clear() { return creation_BTN_clear; }
+
+    public static int getCreation_btn_save() { return creation_btn_save; }
+
+    public static int getMyListItem_TXT_name() { return myListItem_TXT_name; }
+
+    public static int getMyListItem_TXT_price() { return myListItem_TXT_price; }
+
+    public static int getMyListItem_TXT_quantity() { return myListItem_TXT_quantity; }
 
     public static ArrayList<Item> getCategory() {
         initCategories();
@@ -61,6 +83,7 @@ public class DataManager {
     }
 
     public static void initCategories() {
+        category.clear();
         initVegetables();
         initFruits();
     }

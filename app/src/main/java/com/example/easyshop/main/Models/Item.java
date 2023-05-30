@@ -42,10 +42,11 @@ public class Item extends AppCompatActivity {
     }
 
     public String toString() {
-        return "Category{" +
+        return "Item{" +
                 "type='" + type + '\'' +
                 "name='" + name + '\'' +
                 ", price='" + price + '\'' +
+                ", quantity='" + quantity + '\'' +
                 '}';
     }
 }
