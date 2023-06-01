@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.easyshop.main.Models.CreatedList;
+import com.example.easyshop.main.Object.CreatedList;
+import com.example.easyshop.main.Object.Item;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class MySP {
     private static final String DB_FILE = "DB_FILE";
@@ -47,22 +50,22 @@ public class MySP {
     }
 
     public CreatedList loadFromJson() {
-        String fromSP = getString("ObstacleRaceGame", "");
-        Log.d("", fromSP);
+        String fromSP = getString("EasyShop", "");
+        Log.d("", "fromSP" + fromSP);
         CreatedList customListFromJson = new Gson().fromJson(fromSP, CreatedList.class);
-        Log.d("", "" + customListFromJson);
+        Log.d("", "customListFromJson" + customListFromJson);
         if (customListFromJson == null)
-            customListFromJson = new CreatedList(null);
+            customListFromJson = new CreatedList(new ArrayList<>());
 
         return customListFromJson;
     }
 
-    public void saveToJason(int type, String name, double price, int quantity) {
+    public void saveToJason(ArrayList<Item> list) {
         CreatedList createdList;
         createdList = loadFromJson();
-        createdList.addItem(name, price, quantity);
+        //createdList.addItem(name, price, quantity);
         String jsonStr = new Gson().toJson(createdList);
-        putString("ObstacleRaceGame", jsonStr);
+        putString("EasyShop", jsonStr);
         Log.d("jsonStr", jsonStr.toString());
     }
 }

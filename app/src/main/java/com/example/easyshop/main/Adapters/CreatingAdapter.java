@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -18,9 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.easyshop.R;
 import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Models.CategoryList;
-import com.example.easyshop.main.Models.CreatedList;
-import com.example.easyshop.main.Models.Item;
+import com.example.easyshop.main.Object.CategoryList;
+import com.example.easyshop.main.Object.Item;
 
 public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.CreatingViewHolder> {
     private CategoryList categoryList;
@@ -50,22 +48,6 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
         holder.category_TXT_name.setText(item.getName());
         holder.category_TXT_price.setText(item.getPrice() + "$ per Kg");
         initSpinner(holder);
-        //holder.item_LAYOUT.setOnClickListener(v -> spinnerClicked(categoryList.getCategory().get(holder.getAdapterPosition())));
-
-//        holder.item_LAYOUT.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Item selectedItem = categoryList.getCategory().get(position);
-//                if (spinner_callback != null) {
-//                    spinner_callback.spinnerClicked(selectedItem);
-//                }
-//            }
-//        });
-    }
-
-    private void spinnerClicked(Item selectedItem) {
-        if (spinner_callback != null)
-            spinner_callback.spinnerClicked(selectedItem);
     }
 
     private void initSpinner(CreatingViewHolder holder) {
@@ -76,18 +58,30 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
         holder.spinner_quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int quantity = Integer.parseInt(parent.getItemAtPosition(position).toString());
-                Item selectedItem = categoryList.getCategory().get(holder.getAdapterPosition());
-                selectedItem.setQuantity(quantity);
-                Log.d("", "selectedItem" + selectedItem);
-                Log.d("", "quantity" + quantity);
-                spinner_callback.spinnerClicked(selectedItem);
+                if (userSelection[0]) {
+                    userSelection[0] = false;
+                    int quantity = Integer.parseInt(parent.getItemAtPosition(position).toString());
+                    Item selectedItem = categoryList.getCategory().get(holder.getAdapterPosition());
+                    selectedItem.setQuantity(quantity);
+                    selectedItem.setPrice(setNewPrice(selectedItem));
+                    Log.d("", "selectedItem" + selectedItem);
+                    Log.d("", "quantity" + quantity);
+                    spinner_callback.spinnerClicked(selectedItem);
+                }
+
+                else {
+                    userSelection[0] = true;
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    private double setNewPrice(Item selectedItem) {
+        return selectedItem.getPrice()* selectedItem.getQuantity();
     }
 
     @Override

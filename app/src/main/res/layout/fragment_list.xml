@@ -9,7 +9,7 @@
     tools:context=".main.Fragments.ListFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/creation_TXT_title"
+        android:id="@+id/toList_TXT_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List"
@@ -19,14 +19,14 @@
         android:textColor="@color/black" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/myList_TXT_subtitle"
+            android:id="@+id/toList_TXT_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_below="@id/creation_TXT_title">
+            android:layout_below="@id/toList_TXT_title">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/myList_TXT_name"
+            android:id="@+id/toList_TXT_name"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Item Name:"
@@ -37,39 +37,39 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/myList_TXT_price"
+            android:id="@+id/toList_TXT_price"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Price:"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20dp"
-            app:layout_constraintStart_toEndOf="@id/myList_TXT_name"
-            app:layout_constraintTop_toTopOf="@id/myList_TXT_name" />
+            app:layout_constraintStart_toEndOf="@id/toList_TXT_name"
+            app:layout_constraintTop_toTopOf="@id/toList_TXT_name" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/myList_TXT_quantity"
+            android:id="@+id/toList_TXT_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity:"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20dp"
-            app:layout_constraintStart_toEndOf="@id/myList_TXT_price"
-            app:layout_constraintTop_toTopOf="@id/myList_TXT_price" />
+            app:layout_constraintStart_toEndOf="@id/toList_TXT_price"
+            app:layout_constraintTop_toTopOf="@id/toList_TXT_price" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myList_RV_list"
+        android:id="@+id/toList_RV_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/myList_TXT_subtitle"
-        android:layout_above="@id/creation_BTN_clear"
+        android:layout_below="@id/toList_TXT_subtitle"
+        android:layout_above="@id/toList_BTN_clear"
         tools:listitem="@layout/my_list_item"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/creation_BTN_clear"
+        android:id="@+id/toList_BTN_clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -80,7 +80,7 @@
         android:layout_alignParentBottom="true"/>
 .
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/creation_BTN_save"
+        android:id="@+id/toList_BTN_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

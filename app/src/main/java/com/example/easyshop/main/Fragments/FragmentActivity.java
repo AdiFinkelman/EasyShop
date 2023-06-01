@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.easyshop.R;
+import com.example.easyshop.main.Interfaces.Save_Callback;
 import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
 import com.example.easyshop.main.Models.CategoriesActivity;
-import com.example.easyshop.main.Models.Item;
-import com.example.easyshop.main.Models.MenuActivity;
+import com.example.easyshop.main.Models.MyListActivity;
+import com.example.easyshop.main.Object.Item;
+
+import java.util.ArrayList;
 
 public class FragmentActivity extends AppCompatActivity {
     private CreationFragment creationFragment;
@@ -40,7 +44,7 @@ public class FragmentActivity extends AppCompatActivity {
 
     private void initFragments() {
         creationFragment = new CreationFragment();
-        listFragment = new ListFragment();
+        listFragment = new ListFragment(null);
     }
 
     @Override
@@ -53,8 +57,4 @@ public class FragmentActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-//    public void addItem(Item selectedItem) {
-//        listFragment.spinnerClicked(selectedItem);
-//    }
 }

@@ -25,6 +25,15 @@ public class MenuActivity extends AppCompatActivity {
 
         AppCompatImageButton createBTN = findViewById(DataManager.getCreate_menu_BTN());
         createBTN.setOnClickListener(v -> openCategoriesActivity());
+
+        AppCompatImageButton myListBTN = findViewById(DataManager.getMyList_menu_BTN());
+        myListBTN.setOnClickListener(v -> openMyListActivity());
+    }
+
+    private void openMyListActivity() {
+        Intent intent = new Intent(this, MyListActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void openCategoriesActivity() {

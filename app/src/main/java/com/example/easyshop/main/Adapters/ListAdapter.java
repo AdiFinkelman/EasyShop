@@ -3,25 +3,22 @@ package com.example.easyshop.main.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshop.R;
+import com.example.easyshop.main.Interfaces.Save_Callback;
 import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Models.CategoryList;
-import com.example.easyshop.main.Models.CreatedList;
-import com.example.easyshop.main.Models.Item;
+import com.example.easyshop.main.Object.CreatedList;
+import com.example.easyshop.main.Object.Item;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> implements Spinner_Callback {
     private CreatedList createdList;
 
-    public ListAdapter(CreatedList createdList) {
+    public ListAdapter(CreatedList createdList, Save_Callback save_callback) {
         this.createdList = createdList;
         if (createdList == null) {
             createdList = new CreatedList(null);
@@ -42,7 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Item item = getItem(position);
         holder.myListItem_TXT_name.setText(item.getName());
-        holder.myListItem_TXT_price.setText(item.getPrice() + "$ per Kg");
+        holder.myListItem_TXT_price.setText(item.getPrice() + "$");
         holder.myListItem_TXT_quantity.setText(item.getQuantity() + "");
     }
 
@@ -74,5 +71,4 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             myListItem_TXT_quantity = itemView.findViewById(DataManager.getMyListItem_TXT_quantity());
         }
     }
-
 }

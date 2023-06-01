@@ -1,11 +1,9 @@
 package com.example.easyshop.main.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -17,8 +15,8 @@ import com.example.easyshop.R;
 import com.example.easyshop.main.Adapters.CreatingAdapter;
 import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Models.CategoryList;
-import com.example.easyshop.main.Models.Item;
+import com.example.easyshop.main.Object.CategoryList;
+import com.example.easyshop.main.Object.Item;
 
 import java.util.ArrayList;
 

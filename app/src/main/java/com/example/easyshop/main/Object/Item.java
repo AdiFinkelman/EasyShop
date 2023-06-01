@@ -1,4 +1,4 @@
-package com.example.easyshop.main.Models;
+package com.example.easyshop.main.Object;
 
 import androidx.appcompat.app.AppCompatActivity;
 

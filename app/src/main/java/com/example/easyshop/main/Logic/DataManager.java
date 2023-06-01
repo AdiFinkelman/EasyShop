@@ -1,7 +1,7 @@
 package com.example.easyshop.main.Logic;
 
 import com.example.easyshop.R;
-import com.example.easyshop.main.Models.Item;
+import com.example.easyshop.main.Object.Item;
 
 import java.util.ArrayList;
 
@@ -35,11 +35,17 @@ public class DataManager {
     private static final int myListItem_TXT_name = R.id.myListItem_TXT_name;
     private static final int myListItem_TXT_price = R.id.myListItem_TXT_price;
     private static final int myListItem_TXT_quantity = R.id.myListItem_TXT_quantity;
+    private static final int myListItem_LAYOUT = R.id.myListItem_LAYOUT;
 
     //ListFragment
+    private static final int toList_RV_list = R.id.toList_RV_list;
+    private static final int toList_BTN_clear = R.id.toList_BTN_clear;
+    private static final int toList_btn_save = R.id.toList_BTN_save;
+
+    //MyList Activity
     private static final int myList_RV_list = R.id.myList_RV_list;
-    private static final int creation_BTN_clear = R.id.creation_BTN_clear;
-    private static final int creation_btn_save = R.id.creation_BTN_save;
+    private static final int myList_TXT_value = R.id.myList_TXT_value;
+    private static ArrayList<Item> myList = new ArrayList<>();
 
     public static int getCreate_menu_BTN() { return create_menu_BTN; }
 
@@ -65,17 +71,24 @@ public class DataManager {
 
     public static int getSpinner_quantity() { return spinner_quantity; }
 
-    public static int getMyList_RV_list() { return myList_RV_list; }
+    public static int getToList_RV_list() { return toList_RV_list; }
 
-    public static int getCreation_BTN_clear() { return creation_BTN_clear; }
+    public static int getToList_BTN_clear() { return toList_BTN_clear; }
 
-    public static int getCreation_btn_save() { return creation_btn_save; }
+    public static int getToList_btn_save() { return toList_btn_save; }
 
     public static int getMyListItem_TXT_name() { return myListItem_TXT_name; }
 
     public static int getMyListItem_TXT_price() { return myListItem_TXT_price; }
 
     public static int getMyListItem_TXT_quantity() { return myListItem_TXT_quantity; }
+    public static int getMyListItem_LAYOUT() { return  myListItem_LAYOUT; }
+
+    public static int getMyList_RV_list() { return myList_RV_list; }
+
+    public static int getMyList_TXT_value() { return  myList_TXT_value; }
+
+    public static ArrayList<Item> getMyList() { return myList; }
 
     public static ArrayList<Item> getCategory() {
         initCategories();
