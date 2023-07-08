@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //Second Fragment
 public class CreatedList {
     private String name = "";
-    private ArrayList<Item> createdList = new ArrayList<>();
+    private ArrayList<Item> createdList;
 
     public CreatedList(ArrayList<Item> createdList) {
         this.createdList = createdList;
@@ -23,14 +23,6 @@ public class CreatedList {
     public CreatedList setList(ArrayList<Item> createdList) {
         this.createdList = createdList;
         return this;
-    }
-
-    public void addItem(String name, double price, int quantity) {
-        createdList.add(new Item()
-                .setName(name)
-                .setPrice(price)
-                .setQuantity(quantity)
-        );
     }
 
     @Override

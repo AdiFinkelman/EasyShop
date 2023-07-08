@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.Models.MapActivity" >
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/categories_background_green"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="-20dp"
+        android:elevation="8dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/green_background">
+
+        <RelativeLayout
+            android:id="@+id/background_LAYOUT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:text="Nearby Shops"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                tools:fontFamily="monospace"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="125dp"
+                android:layout_height="35dp"
+                android:padding="8dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/easy_shop" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/categories_background_green"
+        android:layout_marginTop="-20dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/myLocation_BTN_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_my_location_24"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>

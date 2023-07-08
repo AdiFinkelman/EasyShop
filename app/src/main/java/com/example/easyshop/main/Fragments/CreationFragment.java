@@ -63,6 +63,9 @@ public class CreationFragment extends Fragment {
         else if (categoryType == DataManager.getCategory_fruits())
             categoryName = "Fruits";
 
+        else if (categoryType == DataManager.getCategory_butchery())
+            categoryName = "Butchery";
+
         return categoryName;
     }
 

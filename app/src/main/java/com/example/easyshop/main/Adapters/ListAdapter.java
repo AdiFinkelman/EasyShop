@@ -1,11 +1,13 @@
 package com.example.easyshop.main.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshop.R;
@@ -39,8 +41,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Item item = getItem(position);
         holder.myListItem_TXT_name.setText(item.getName());
-        holder.myListItem_TXT_price.setText(item.getPrice() + "$");
+        holder.myListItem_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪");
         holder.myListItem_TXT_quantity.setText(item.getQuantity() + "");
+        holder.myListItem_LAYOUT.setOnClickListener(v -> {
+            if (createdList.getList().size() == 1)
+                createdList.getList().clear();
+            else
+                createdList.getList().remove(position);
+            notifyItemRemoved(position);
+        });
     }
 
     @Override
@@ -54,7 +63,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
     @Override
     public void spinnerClicked(Item selectedItem) {
-        createdList.getList().add(selectedItem);
+        for (Item item: createdList.getList()) {
+             if (item.getName().equals(selectedItem.getName())) {
+                 Log.d("", "item.getName " + item.getName());
+                 Log.d("", "selectedItem " + selectedItem.getName());
+                 item.setQuantity(selectedItem.getQuantity());
+             }
+             else
+                 createdList.getList().add(selectedItem);
+        }
+//        if (!createdList.getList().contains(selectedItem.getName()))
+//            createdList.getList().add(selectedItem);
         notifyDataSetChanged();
     }
 
@@ -62,6 +81,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         private AppCompatTextView myListItem_TXT_name;
         private AppCompatTextView myListItem_TXT_price;
         private AppCompatTextView myListItem_TXT_quantity;
+        private ConstraintLayout myListItem_LAYOUT;
 
 
         public ListViewHolder(@NonNull View itemView) {
@@ -69,6 +89,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             myListItem_TXT_name = itemView.findViewById(DataManager.getMyListItem_TXT_name());
             myListItem_TXT_price = itemView.findViewById(DataManager.getMyListItem_TXT_price());
             myListItem_TXT_quantity = itemView.findViewById(DataManager.getMyListItem_TXT_quantity());
+            myListItem_LAYOUT = itemView.findViewById(DataManager.getMyListItem_LAYOUT());
         }
     }
 }
