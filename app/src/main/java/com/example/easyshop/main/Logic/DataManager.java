@@ -3,6 +3,7 @@ package com.example.easyshop.main.Logic;
 import com.example.easyshop.R;
 import com.example.easyshop.main.Object.Item;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class DataManager {
@@ -46,6 +47,17 @@ public class DataManager {
     private static final int myList_RV_list = R.id.myList_RV_list;
     private static final int myList_TXT_value = R.id.myList_TXT_value;
     private static ArrayList<Item> myList = new ArrayList<>();
+    //Map Activity
+    private static final int myLocation_BTN_map = R.id.myLocation_BTN_map;
+    public static DecimalFormat df = new DecimalFormat("#.##");
+    //Register&Login
+    private static final int editTextEmail = R.id.et_email;
+    private static final int editTextPassword = R.id.et_password;
+    private static final int regBTN = R.id.btn_register;
+    private static final int loginBTN = R.id.btn_login;
+    private static final int regProgressBar = R.id.progressBar;
+    private static final int txtClickToLogin = R.id.loginNow;
+    private static final int logoutBTN = R.id.menu_BTN_logout;
 
     public static int getCreate_menu_BTN() { return create_menu_BTN; }
 
@@ -89,6 +101,20 @@ public class DataManager {
     public static int getMyList_TXT_value() { return  myList_TXT_value; }
 
     public static ArrayList<Item> getMyList() { return myList; }
+    public static int getMyLocation_BTN_map() { return myLocation_BTN_map; }
+    public static String getDfFormat(double val) {
+        return df.format(val);
+    }
+
+    public static int getEditTextEmail() { return editTextEmail; }
+    public static int getEditTextPassword() { return editTextPassword; }
+    public static int getRegBTN() { return regBTN; }
+    public static int getLoginBTN() { return loginBTN; }
+    public static int getRegProgressBar() { return regProgressBar; }
+    public static int getTxtClickToLogin() { return txtClickToLogin; }
+    public static int getLogoutBTN() {
+        return logoutBTN;
+    }
 
     public static ArrayList<Item> getCategory() {
         initCategories();
@@ -99,103 +125,121 @@ public class DataManager {
         category.clear();
         initVegetables();
         initFruits();
+        initButchery();
     }
 
     private static void initVegetables() {
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Tomato")
-                .setPrice(2.0)
+                .setPrice(7.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Cucumber")
-                .setPrice(2.5)
+                .setPrice(7.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Onion")
-                .setPrice(2.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Pepper")
-                .setPrice(3.0)
+                .setPrice(11.9)
                 .setQuantity(0)
         );
+
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Potato")
-                .setPrice(1.5)
+                .setPrice(4.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Carrot")
-                .setPrice(2.0)
+                .setPrice(5.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Garlic")
-                .setPrice(1.0)
+                .setPrice(5.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
-                .setName("Hot Chilli Pepper")
-                .setPrice(3.0)
+                .setCategory(Item.CATEGORY.VEGETABLES)
+                .setName("Chilli")
+                .setPrice(11.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Celery")
-                .setPrice(1.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Lettuce")
-                .setPrice(1.5)
+                .setPrice(4.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Mushrooms")
-                .setPrice(1.0)
+                .setPrice(40.2)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Broccoli")
-                .setPrice(1.0)
+                .setPrice(9.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Beet")
-                .setPrice(2.0)
+                .setPrice(5.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Cabbage")
-                .setPrice(1.0)
+                .setPrice(29.5)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Zucchini")
-                .setPrice(2.5)
+                .setPrice(8.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_vegetables())
+                .setCategory(Item.CATEGORY.VEGETABLES)
                 .setName("Cauliflower")
-                .setPrice(3.0)
+                .setPrice(11.9)
                 .setQuantity(0)
         );
     }
@@ -203,110 +247,208 @@ public class DataManager {
     private static void initFruits() {
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Watermelon")
-                .setPrice(1.5)
+                .setPrice(4.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Melon")
-                .setPrice(2.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Kiwi")
-                .setPrice(4.0)
+                .setPrice(14.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Strawberry")
-                .setPrice(2.5)
+                .setPrice(30)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Lemon")
-                .setPrice(2.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Banana")
-                .setPrice(4.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Apple")
-                .setPrice(5.5)
+                .setPrice(11.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Tangerine")
-                .setPrice(4.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Orange")
-                .setPrice(3.0)
+                .setPrice(6.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Avocado")
-                .setPrice(6.5)
+                .setPrice(19.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Papaya")
-                .setPrice(7.5)
+                .setPrice(24.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Cherry")
-                .setPrice(4.0)
+                .setPrice(70)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Pear")
-                .setPrice(4.5)
+                .setPrice(14.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Palm Date")
-                .setPrice(1.5)
+                .setPrice(32.3)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Peach")
-                .setPrice(4.5)
+                .setPrice(16.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Grapefruit")
-                .setPrice(2.5)
+                .setPrice(5.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
+                .setCategory(Item.CATEGORY.FRUITS)
                 .setName("Pineapple")
-                .setPrice(7.5)
+                .setPrice(29.9)
                 .setQuantity(0)
         );
         category.add(new Item()
                 .setType(DataManager.getCategory_fruits())
-                .setName("Mango")
-                .setPrice(3.5)
+                .setCategory(Item.CATEGORY.FRUITS)
+                .setName("Grapes")
+                .setPrice(20.9)
+                .setQuantity(0)
+        );
+    }
+
+    private static void initButchery() {
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Entrecote")
+                .setPrice(129.9)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Ribs")
+                .setPrice(69.9)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Picanha")
+                .setPrice(140)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Sirloin")
+                .setPrice(140)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Salmon")
+                .setPrice(75)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Tilapia")
+                .setPrice(30)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Tuna")
+                .setPrice(45)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Chicken breast")
+                .setPrice(45)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Chicken thighs")
+                .setPrice(30)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Schnitzel")
+                .setPrice(38)
+                .setQuantity(0)
+        );
+        category.add(new Item()
+                .setType(DataManager.getCategory_butchery())
+                .setCategory(Item.CATEGORY.BUTCHERY)
+                .setName("Wings")
+                .setPrice(13)
                 .setQuantity(0)
         );
     }

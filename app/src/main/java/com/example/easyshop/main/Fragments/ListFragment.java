@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -14,12 +15,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshop.R;
+import com.example.easyshop.databinding.ActivityMenuBinding;
 import com.example.easyshop.main.Adapters.ListAdapter;
 import com.example.easyshop.main.Interfaces.Save_Callback;
 import com.example.easyshop.main.Interfaces.Spinner_Callback;
 import com.example.easyshop.main.Logic.DataManager;
+import com.example.easyshop.main.Models.LoginActivity;
+import com.example.easyshop.main.Models.RegisterActivity;
 import com.example.easyshop.main.Object.CreatedList;
 import com.example.easyshop.main.Object.Item;
+import com.example.easyshop.main.Object.MyList;
+import com.example.easyshop.main.Utilities.SignalGenerator;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -51,7 +64,6 @@ public class ListFragment extends Fragment implements Spinner_Callback {
 
     private void initViews(View view) {
         newList = new ArrayList<>();
-//        createdList = MySP.getInstance().loadFromJson();
         createdList = new CreatedList(newList);
         listAdapter = new ListAdapter(createdList, save_callback);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
@@ -74,7 +86,7 @@ public class ListFragment extends Fragment implements Spinner_Callback {
             }
         } else { newList.add(selectedItem); }
         listAdapter.notifyDataSetChanged();
-        Log.d("" , "NEW LIST" + newList.toString());
+        Log.d("" , "NEW LIST " + newList.toString());
     }
 
     public void saveToMyList() {
@@ -82,22 +94,93 @@ public class ListFragment extends Fragment implements Spinner_Callback {
             @Override
             public void onClick(View v) {
                 myList.addAll(newList);
+
+                String regEmail = RegisterActivity.userEmail;
+                String loginEmail = LoginActivity.userEmail;
+                String userEmail;
+                if (regEmail != null)
+                    userEmail = regEmail;
+                else
+                    userEmail = loginEmail;
+
+                saveToFirebase(userEmail);
+
+                SignalGenerator.getInstance().vibrate(400);
+                SignalGenerator.getInstance().toast("You added " + newList.size() + " items", Toast.LENGTH_SHORT);
                 newList.clear();
                 initViews(v);
 
                 if (save_callback != null) {
                     save_callback.onSaveClicked(myList);
-
                 }
             }
         });
     }
+
+    private void saveToFirebase(String userEmail) {
+        MyList list = new MyList(myList, userEmail);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("lists");
+
+        // Check if the list already exists based on a unique identifier
+        reference.orderByChild("name").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // List already exists, update its data
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        String key = childSnapshot.getKey();
+                        if (key != null) {
+                            reference.child(key).setValue(list)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            SignalGenerator.getInstance().toast("My List updated successfully", Toast.LENGTH_SHORT);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            SignalGenerator.getInstance().toast("Failed to update My List", Toast.LENGTH_SHORT);
+                                        }
+                                    });
+                        }
+                    }
+                } else {
+                    // List doesn't exist, create a new entry
+                    String key = reference.push().getKey();
+                    if (key != null) {
+                        reference.child(key).setValue(list)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        SignalGenerator.getInstance().toast("My List created successfully", Toast.LENGTH_SHORT);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        SignalGenerator.getInstance().toast("Failed to create My List", Toast.LENGTH_SHORT);
+                                    }
+                                });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                SignalGenerator.getInstance().toast("Error retrieving My List data", Toast.LENGTH_SHORT);
+            }
+        });
+    }
+
 
     private void clearCreatingList() {
         clear_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newList.clear();
+                SignalGenerator.getInstance().vibrate(100);
                 initViews(v);
             }
         });
@@ -106,9 +189,5 @@ public class ListFragment extends Fragment implements Spinner_Callback {
     @Override
     public void spinnerClicked(Item selectedItem) {
         addItem(selectedItem);
-    }
-
-    public void setSave_callback(Save_Callback save_callback) {
-        this.save_callback = save_callback;
     }
 }

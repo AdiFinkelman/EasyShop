@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //First Fragment
 public class CategoryList {
     private String name = "";
-    private ArrayList<Item> itemsList = new ArrayList<>();
+    private ArrayList<Item> itemsList;
 
     public CategoryList(ArrayList<Item> itemsList) {
         this.itemsList = itemsList;

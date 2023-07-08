@@ -46,7 +46,7 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
     public void onBindViewHolder(@NonNull CreatingViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Item item = getItem(position);
         holder.category_TXT_name.setText(item.getName());
-        holder.category_TXT_price.setText(item.getPrice() + "$ per Kg");
+        holder.category_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪ per Kg");
         initSpinner(holder);
     }
 
@@ -59,14 +59,14 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelection[0]) {
-                    userSelection[0] = false;
-                    int quantity = Integer.parseInt(parent.getItemAtPosition(position).toString());
+                    double quantity = Double.parseDouble(parent.getItemAtPosition(position).toString());
                     Item selectedItem = categoryList.getCategory().get(holder.getAdapterPosition());
                     selectedItem.setQuantity(quantity);
                     selectedItem.setPrice(setNewPrice(selectedItem));
                     Log.d("", "selectedItem" + selectedItem);
                     Log.d("", "quantity" + quantity);
                     spinner_callback.spinnerClicked(selectedItem);
+                    userSelection[0] = false;
                 }
 
                 else {
@@ -81,7 +81,7 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
     }
 
     private double setNewPrice(Item selectedItem) {
-        return selectedItem.getPrice()* selectedItem.getQuantity();
+        return selectedItem.getPrice() * selectedItem.getQuantity();
     }
 
     @Override

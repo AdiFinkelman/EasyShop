@@ -16,6 +16,7 @@ import com.example.easyshop.main.Logic.DataManager;
 public class CategoriesActivity extends AppCompatActivity {
     CardView vegetables_BTN;
     CardView fruits_BTN;
+    CardView butchery_BTN;
     private int categoryType;
 
     @Override
@@ -26,13 +27,14 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_categories);
 
         findViews();
-        vegetables_BTN.setOnClickListener(v -> {
-            categoryType = DataManager.getCategory_vegetables();
-            openFragmentActivity();
-        });
+        onClickCategory(vegetables_BTN, DataManager.getCategory_vegetables());
+        onClickCategory(fruits_BTN, DataManager.getCategory_fruits());
+        onClickCategory(butchery_BTN, DataManager.getCategory_butchery());
+    }
 
-        fruits_BTN.setOnClickListener(v -> {
-            categoryType = DataManager.getCategory_fruits();
+    private void onClickCategory(CardView button, int category) {
+        button.setOnClickListener(v -> {
+            categoryType = category;
             openFragmentActivity();
         });
     }
@@ -40,6 +42,7 @@ public class CategoriesActivity extends AppCompatActivity {
     private void findViews() {
         vegetables_BTN = findViewById(DataManager.getCategory_vegetables());
         fruits_BTN = findViewById(DataManager.getCategory_fruits());
+        butchery_BTN = findViewById(DataManager.getCategory_butchery());
     }
 
     private void openFragmentActivity() {

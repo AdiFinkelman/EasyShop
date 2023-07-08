@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -13,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.easyshop.R;
 import com.example.easyshop.main.Interfaces.Save_Callback;
 import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Object.CreatedList;
 import com.example.easyshop.main.Object.Item;
 import com.example.easyshop.main.Object.MyList;
+import com.example.easyshop.main.Utilities.SignalGenerator;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -27,7 +32,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyListView
         this.save_callback = save_callback;
         this.myList = myList;
         if (myList == null) {
-            myList = new MyList(null);
+            myList = new MyList(null, "0");
             myList.setName("EasyShop");
         }
     }
@@ -45,9 +50,11 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyListView
     public void onBindViewHolder(@NonNull MyListViewHolder holder, int position) {
         Item item = getItem(position);
         holder.myList_TXT_name.setText(item.getName());
-        holder.myList_TXT_price.setText(item.getPrice() + "$");
+        holder.myList_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪");
         holder.myList_TXT_quantity.setText(item.getQuantity() + "");
         holder.myListItem_LAYOUT.setOnClickListener(v -> {
+            deleteItemFromFirebase(item.getName());
+            Log.d("", "ITEM: " + item.getName());
             if (myList.getList().size() == 1)
                 myList.getList().clear();
             else
@@ -55,6 +62,25 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyListView
             notifyItemRemoved(position);
         });
     }
+
+    private void deleteItemFromFirebase(String itemKey) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("list").child(itemKey);
+
+        reference.removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        SignalGenerator.getInstance().toast("Item deleted successfully", Toast.LENGTH_SHORT);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        SignalGenerator.getInstance().toast("Failed to delete item", Toast.LENGTH_SHORT);
+                    }
+                });
+    }
+
 
     @Override
     public int getItemCount() {
@@ -68,7 +94,6 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyListView
     @Override
     public void onSaveClicked(ArrayList<Item> itemsList) {
         myList.getList().addAll(itemsList);
-        Log.d("", "MY LIST" + "");
         notifyDataSetChanged();
     }
 

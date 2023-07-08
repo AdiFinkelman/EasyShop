@@ -6,14 +6,22 @@ import androidx.appcompat.widget.AppCompatImageButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.easyshop.R;
 import com.example.easyshop.main.Logic.DataManager;
+import com.example.easyshop.main.Utilities.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MenuActivity extends AppCompatActivity {
+    FirebaseAuth auth;
+    AppCompatImageButton button;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +31,39 @@ public class MenuActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_menu);
 
+        buttonsClicked();
+
+        auth = FirebaseAuth.getInstance();
+        findViews();
+        user = auth.getCurrentUser();
+        if (user == null) {
+            openLoginActivity();
+        }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                openLoginActivity();
+            }
+        });
+    }
+
+    private void buttonsClicked() {
         AppCompatImageButton createBTN = findViewById(DataManager.getCreate_menu_BTN());
         createBTN.setOnClickListener(v -> openCategoriesActivity());
 
         AppCompatImageButton myListBTN = findViewById(DataManager.getMyList_menu_BTN());
         myListBTN.setOnClickListener(v -> openMyListActivity());
+
+        AppCompatImageButton mapBTN = findViewById(DataManager.getMap_menu_BTN());
+        mapBTN.setOnClickListener(v -> openMapActivity());
+    }
+
+    private void openMapActivity() {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void openMyListActivity() {
@@ -41,4 +77,15 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private void openLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void findViews() {
+        button = findViewById(DataManager.getLogoutBTN());
+    }
+
 }

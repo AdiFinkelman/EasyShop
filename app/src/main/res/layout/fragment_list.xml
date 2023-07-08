@@ -5,30 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/white"
+    android:background="@color/yellow_200"
     tools:context=".main.Fragments.ListFragment">
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/toList_TXT_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="List"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="@color/black" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toList_TXT_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_below="@id/toList_TXT_title">
+            android:layout_margin="5dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/toList_TXT_name"
-            android:layout_width="150dp"
+            android:layout_width="135dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="Item Name:"
             android:textStyle="bold"
             android:textColor="@color/black"

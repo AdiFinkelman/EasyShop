@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.easyshop.main.Object.CreatedList;
 import com.example.easyshop.main.Object.Item;
+import com.example.easyshop.main.Object.MyList;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -49,22 +49,22 @@ public class MySP {
         editor.apply();
     }
 
-    public CreatedList loadFromJson() {
+    public MyList loadFromJson() {
         String fromSP = getString("EasyShop", "");
         Log.d("", "fromSP" + fromSP);
-        CreatedList customListFromJson = new Gson().fromJson(fromSP, CreatedList.class);
+        MyList customListFromJson = new Gson().fromJson(fromSP, MyList.class);
         Log.d("", "customListFromJson" + customListFromJson);
         if (customListFromJson == null)
-            customListFromJson = new CreatedList(new ArrayList<>());
+            customListFromJson = new MyList(new ArrayList<>(), "0");
 
         return customListFromJson;
     }
 
-    public void saveToJason(ArrayList<Item> list) {
-        CreatedList createdList;
-        createdList = loadFromJson();
-        //createdList.addItem(name, price, quantity);
-        String jsonStr = new Gson().toJson(createdList);
+    public void saveToJason(ArrayList<Item> constantList) {
+        MyList myList;
+        myList = loadFromJson();
+        //myList.addItem(name, price, quantity);
+        String jsonStr = new Gson().toJson(myList);
         putString("EasyShop", jsonStr);
         Log.d("jsonStr", jsonStr.toString());
     }
