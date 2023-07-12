@@ -1,6 +1,5 @@
 package com.example.easyshop.main.Adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.example.easyshop.main.Object.CreatedList;
 import com.example.easyshop.main.Object.Item;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> implements Spinner_Callback {
-    private CreatedList createdList;
+    private final CreatedList createdList;
 
     public ListAdapter(CreatedList createdList, Save_Callback save_callback) {
         this.createdList = createdList;
@@ -43,13 +42,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         holder.myListItem_TXT_name.setText(item.getName());
         holder.myListItem_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪");
         holder.myListItem_TXT_quantity.setText(item.getQuantity() + "");
-        holder.myListItem_LAYOUT.setOnClickListener(v -> {
-            if (createdList.getList().size() == 1)
-                createdList.getList().clear();
-            else
-                createdList.getList().remove(position);
-            notifyItemRemoved(position);
-        });
     }
 
     @Override
@@ -65,15 +57,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void spinnerClicked(Item selectedItem) {
         for (Item item: createdList.getList()) {
              if (item.getName().equals(selectedItem.getName())) {
-                 Log.d("", "item.getName " + item.getName());
-                 Log.d("", "selectedItem " + selectedItem.getName());
                  item.setQuantity(selectedItem.getQuantity());
              }
              else
                  createdList.getList().add(selectedItem);
         }
-//        if (!createdList.getList().contains(selectedItem.getName()))
-//            createdList.getList().add(selectedItem);
         notifyDataSetChanged();
     }
 

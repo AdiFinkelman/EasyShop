@@ -3,9 +3,7 @@ package com.example.easyshop.main.Utilities;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -13,15 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
 
 public class NearbyPlaces  extends AsyncTask<Object, String, String> {
     String googlePlacesData;
@@ -36,7 +26,8 @@ public class NearbyPlaces  extends AsyncTask<Object, String, String> {
             url = (String) objects[1];
             DownloadUrl downloadUrl = new DownloadUrl();
             googlePlacesData = downloadUrl.retrieveUrl(url);
-            
+            Log.d("NearbyPlaces", "URL: " + url);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,8 +57,7 @@ public class NearbyPlaces  extends AsyncTask<Object, String, String> {
                 markerOptions.title(name);
                 markerOptions.position(latLng);
                 gMap.addMarker(markerOptions);
-                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-                Log.d("", "JSON OBJECT" + jsonObject1.toString());
+                Log.d("", "JSON OBJECT" + jsonObject1);
             }
 
         } catch (JSONException e) {

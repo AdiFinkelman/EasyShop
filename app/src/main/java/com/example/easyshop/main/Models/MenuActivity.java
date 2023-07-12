@@ -1,20 +1,15 @@
 package com.example.easyshop.main.Models;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.example.easyshop.R;
 import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Utilities.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

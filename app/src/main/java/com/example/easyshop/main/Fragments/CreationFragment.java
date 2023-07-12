@@ -66,6 +66,21 @@ public class CreationFragment extends Fragment {
         else if (categoryType == DataManager.getCategory_butchery())
             categoryName = "Butchery";
 
+        else if (categoryType == DataManager.getCategory_bakery())
+            categoryName = "Bakery";
+
+        else if (categoryType == DataManager.getCategory_dairy())
+            categoryName = "Dairy";
+
+        else if (categoryType == DataManager.getCategory_dry_and_canned())
+            categoryName = "Dry and Canned";
+
+        else if (categoryType == DataManager.getCategory_beverages())
+            categoryName = "Beverages";
+
+        else if (categoryType == DataManager.getCategory_snacks())
+            categoryName = "Snacks";
+
         return categoryName;
     }
 
@@ -97,11 +112,4 @@ public class CreationFragment extends Fragment {
     public void setSpinner_callback(Spinner_Callback spinner_callback) {
         this.spinner_callback = spinner_callback;
     }
-
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        binding = null;
-//    }
-
 }

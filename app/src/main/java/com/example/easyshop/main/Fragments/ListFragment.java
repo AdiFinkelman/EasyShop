@@ -1,6 +1,5 @@
 package com.example.easyshop.main.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshop.R;
-import com.example.easyshop.databinding.ActivityMenuBinding;
 import com.example.easyshop.main.Adapters.ListAdapter;
 import com.example.easyshop.main.Interfaces.Save_Callback;
 import com.example.easyshop.main.Interfaces.Spinner_Callback;
@@ -79,13 +78,19 @@ public class ListFragment extends Fragment implements Spinner_Callback {
     }
 
     public void addItem(Item selectedItem) {
-        if (newList.contains(selectedItem.getName())) {
-            for (Item item : newList) {
-                if (item.getName().equals(selectedItem.getName()))
-                    item.setQuantity(selectedItem.getQuantity());
+        boolean isItemExist = false;
+        for (Item item : newList) {
+            if (item.getName().equals(selectedItem.getName()) && item.getQuantity() != 0) {
+                item.setQuantity(selectedItem.getQuantity());
+                item.setPrice(selectedItem.getPrice());
+                isItemExist = true;
             }
-        } else { newList.add(selectedItem); }
+        }
+        if (!isItemExist)
+            newList.add(selectedItem);
+
         listAdapter.notifyDataSetChanged();
+        initCreationFragmentView();
         Log.d("" , "NEW LIST " + newList.toString());
     }
 
@@ -109,6 +114,7 @@ public class ListFragment extends Fragment implements Spinner_Callback {
                 SignalGenerator.getInstance().toast("You added " + newList.size() + " items", Toast.LENGTH_SHORT);
                 newList.clear();
                 initViews(v);
+                initCreationFragmentView();
 
                 if (save_callback != null) {
                     save_callback.onSaveClicked(myList);
@@ -118,12 +124,14 @@ public class ListFragment extends Fragment implements Spinner_Callback {
     }
 
     private void saveToFirebase(String userEmail) {
-        MyList list = new MyList(myList, userEmail);
+
+        MyList list = new MyList().setList(myList).setUserEmail(userEmail);
+        myList = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("lists");
 
         // Check if the list already exists based on a unique identifier
-        reference.orderByChild("name").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.orderByChild("userEmail").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -131,7 +139,9 @@ public class ListFragment extends Fragment implements Spinner_Callback {
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         String key = childSnapshot.getKey();
                         if (key != null) {
-                            reference.child(key).setValue(list)
+                            MyList tempList = childSnapshot.getValue(MyList.class);
+                            tempList.getList().addAll(list.getList());
+                            reference.child(key).setValue(tempList)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
@@ -174,7 +184,6 @@ public class ListFragment extends Fragment implements Spinner_Callback {
         });
     }
 
-
     private void clearCreatingList() {
         clear_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,8 +191,19 @@ public class ListFragment extends Fragment implements Spinner_Callback {
                 newList.clear();
                 SignalGenerator.getInstance().vibrate(100);
                 initViews(v);
+                initCreationFragmentView();
             }
         });
+    }
+
+    public void initCreationFragmentView() {
+        CreationFragment creationFragment = new CreationFragment();
+        creationFragment.setSpinner_callback(ListFragment.this);
+
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_FRAME_creation, creationFragment)
+                .commit();
     }
 
     @Override

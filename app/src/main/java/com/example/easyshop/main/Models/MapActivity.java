@@ -1,7 +1,6 @@
 package com.example.easyshop.main.Models;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -13,25 +12,18 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.easyshop.R;
-import com.example.easyshop.main.Logic.DataManager;
-import com.example.easyshop.main.Utilities.MySP;
 import com.example.easyshop.main.Utilities.NearbyPlaces;
 import com.example.easyshop.main.Utilities.SignalGenerator;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.example.easyshop.databinding.ActivityMapBinding;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-//import com.google.maps.model.PlacesSearchResult;
+
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -44,7 +36,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public boolean locationPermissionGranted = false;
     private double latitude;
     private double longitude;
-    private int PROXIMITY_RADIUS = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +47,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         context = this;
         initMap();
         getLocationPermission();
-        onClickMyLocation(getCurrLatLng());
-        showNearbyPlaces();
+        getCurrLatLng();
     }
 
     private void initMap() {
@@ -70,7 +60,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
         LatLng latLng = new LatLng(latitude, longitude);
-        moveCamera(latLng, 17.0f);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        gMap.setMyLocationEnabled(true);
+        moveCamera(latLng, 15.0f);
+        gMap.getUiSettings().setMyLocationButtonEnabled(true);
+        int buttonPadding = 16;
+        gMap.setPadding(0, 80, buttonPadding, buttonPadding);
+        showNearbyPlaces();
     }
 
     public void getLocationPermission() {
@@ -95,6 +93,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         if (requestCode == FINE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 locationPermissionGranted = false;
+                initMap();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                gMap.setMyLocationEnabled(true);
+                gMap.getUiSettings().setMyLocationButtonEnabled(true);
             } else {
                 locationPermissionGranted = true;
                 SignalGenerator.getInstance().toast("Location Permission is denied", Toast.LENGTH_SHORT);
@@ -134,15 +138,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     }
 
     public void moveCamera(LatLng latLng, float zoom) {
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20.0f));
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.0f));
         gMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
-    }
-
-    private void onClickMyLocation(LatLng latLng) {
-        AppCompatImageButton myLocation_BTN_map = findViewById(DataManager.getMyLocation_BTN_map());
-        myLocation_BTN_map.setOnClickListener(v -> {
-            moveCamera(latLng, 17.0f);
-        });
     }
 
     private void openMenuActivity() {
@@ -153,12 +150,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private void showNearbyPlaces() {
         StringBuilder sb = new StringBuilder(
-                "http://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        sb.append("location=" + latitude + ", " + longitude);
-        sb.append("&radius=1000");
+                "https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        sb.append("location=" + latitude + "," + longitude);
+        sb.append("&radius=2000");
         sb.append("&type=supermarket");
         sb.append("&sensor=true");
-        sb.append("&key=" + getResources().getString(R.string.google_api_key));
+        sb.append("&key=AIzaSyDA0gXfFW4axCWETcwTbw6YqJOI3M_Todo");
 
         String url = sb.toString();
         Object dataTransfer[] = new Object[2];
@@ -167,6 +164,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         NearbyPlaces nearbyPlaces = new NearbyPlaces();
         nearbyPlaces.execute(dataTransfer);
+
         SignalGenerator.getInstance().toast("Showing nearby supermarkets", Toast.LENGTH_SHORT);
     }
 

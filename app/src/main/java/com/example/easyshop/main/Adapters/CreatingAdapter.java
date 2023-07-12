@@ -1,7 +1,6 @@
 package com.example.easyshop.main.Adapters;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,31 +45,40 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
     public void onBindViewHolder(@NonNull CreatingViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Item item = getItem(position);
         holder.category_TXT_name.setText(item.getName());
-        holder.category_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪ per Kg");
-        initSpinner(holder);
+        if (DataManager.isPriceWithWeight(item))
+            holder.category_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪ per kg");
+        else
+            holder.category_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪");
+
+        int arrayType = checkArrayType(holder);
+        initSpinner(holder, arrayType);
     }
 
-    private void initSpinner(CreatingViewHolder holder) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(holder.itemView.getContext(), R.array.numbers, android.R.layout.simple_spinner_item);
+    private int checkArrayType(CreatingViewHolder holder) {
+        Item selectedItem = getItem(holder.getAdapterPosition());
+        if (selectedItem.getType() == DataManager.getCategory_vegetables() || selectedItem.getType() == DataManager.getCategory_fruits() ||
+                selectedItem.getType() == DataManager.getCategory_butchery())
+            return R.array.numbers;
+        return R.array.integer_numbers;
+    }
+
+    private void initSpinner(CreatingViewHolder holder, int arrayType) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(holder.itemView.getContext(), arrayType, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spinner_quantity.setAdapter(adapter);
-        final boolean[] userSelection = {false};
         holder.spinner_quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            private boolean isInitialSelection = true;
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelection[0]) {
+                if (isInitialSelection) {
+                    isInitialSelection = false;
+                } else {
                     double quantity = Double.parseDouble(parent.getItemAtPosition(position).toString());
                     Item selectedItem = categoryList.getCategory().get(holder.getAdapterPosition());
                     selectedItem.setQuantity(quantity);
                     selectedItem.setPrice(setNewPrice(selectedItem));
-                    Log.d("", "selectedItem" + selectedItem);
-                    Log.d("", "quantity" + quantity);
                     spinner_callback.spinnerClicked(selectedItem);
-                    userSelection[0] = false;
-                }
-
-                else {
-                    userSelection[0] = true;
                 }
             }
 
@@ -108,5 +116,4 @@ public class CreatingAdapter extends RecyclerView.Adapter<CreatingAdapter.Creati
             item_LAYOUT = itemView.findViewById(R.id.Item_LAYOUT);
         }
     }
-
 }

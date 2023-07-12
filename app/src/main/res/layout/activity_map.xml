@@ -28,7 +28,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
                 android:text="Nearby Shops"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 tools:fontFamily="monospace"
                 android:textColor="@color/black"/>
@@ -49,14 +49,5 @@
         android:layout_below="@id/categories_background_green"
         android:layout_marginTop="-20dp"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
-
-    <androidx.constraintlayout.utils.widget.ImageFilterButton
-        android:id="@+id/myLocation_BTN_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_my_location_24"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"/>
 
 </RelativeLayout>

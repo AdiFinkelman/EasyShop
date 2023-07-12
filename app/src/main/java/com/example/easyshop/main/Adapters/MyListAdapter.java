@@ -1,6 +1,5 @@
 package com.example.easyshop.main.Adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,27 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.easyshop.R;
 import com.example.easyshop.main.Interfaces.Save_Callback;
 import com.example.easyshop.main.Logic.DataManager;
+import com.example.easyshop.main.Models.LoginActivity;
 import com.example.easyshop.main.Object.Item;
 import com.example.easyshop.main.Object.MyList;
 import com.example.easyshop.main.Utilities.SignalGenerator;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyListViewHolder> implements Save_Callback {
-    private MyList myList;
-    private Save_Callback save_callback;
+    private final MyList myList;
+    private final Save_Callback save_callback;
 
     public MyListAdapter(MyList myList, Save_Callback save_callback) {
         this.save_callback = save_callback;
         this.myList = myList;
-        if (myList == null) {
-            myList = new MyList(null, "0");
-            myList.setName("EasyShop");
-        }
     }
 
     @NonNull
@@ -51,36 +48,44 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyListView
         Item item = getItem(position);
         holder.myList_TXT_name.setText(item.getName());
         holder.myList_TXT_price.setText(DataManager.getDfFormat(item.getPrice()) + " ₪");
-        holder.myList_TXT_quantity.setText(item.getQuantity() + "");
+        if (DataManager.isPriceWithWeight(item))
+            holder.myList_TXT_quantity.setText(item.getQuantity() + " kg");
+        else
+            holder.myList_TXT_quantity.setText(item.getQuantity() + "");
         holder.myListItem_LAYOUT.setOnClickListener(v -> {
-            deleteItemFromFirebase(item.getName());
-            Log.d("", "ITEM: " + item.getName());
+            int currentPosition = holder.getAdapterPosition();
             if (myList.getList().size() == 1)
                 myList.getList().clear();
             else
-                myList.getList().remove(position);
-            notifyItemRemoved(position);
+                myList.getList().remove(currentPosition);
+            notifyItemRemoved(currentPosition);
+            deleteFromFirebase();
+            save_callback.onSaveClicked(myList.getList());
         });
     }
 
-    private void deleteItemFromFirebase(String itemKey) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("list").child(itemKey);
+    private void deleteFromFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("lists");
+        reference.orderByChild("userEmail").equalTo(LoginActivity.userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        String key = childSnapshot.getKey();
+                        if (key != null) {
+                            reference.child(key).setValue(myList);
+                        }
+                    }
+                }
+            }
 
-        reference.removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        SignalGenerator.getInstance().toast("Item deleted successfully", Toast.LENGTH_SHORT);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        SignalGenerator.getInstance().toast("Failed to delete item", Toast.LENGTH_SHORT);
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                SignalGenerator.getInstance().toast("Error retrieving My List data", Toast.LENGTH_SHORT);
+            }
+        });
     }
-
 
     @Override
     public int getItemCount() {
