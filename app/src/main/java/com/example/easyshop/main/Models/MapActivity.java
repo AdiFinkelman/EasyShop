@@ -155,7 +155,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         sb.append("&radius=2000");
         sb.append("&type=supermarket");
         sb.append("&sensor=true");
-        sb.append("&key=AIzaSyDA0gXfFW4axCWETcwTbw6YqJOI3M_Todo");
+        sb.append("&key=");
 
         String url = sb.toString();
         Object dataTransfer[] = new Object[2];
