@@ -1,5 +1,8 @@
 # EasyShop App
-## Introduction
+
+<p align="center">
+  <img src="./app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+</p>
 Welcome to EasyShop, the ultimate companion for your supermarket shopping needs.
 
 With EasyShop, we aim to revolutionize the way you create and manage your shopping lists.
@@ -37,6 +40,14 @@ Each supermarket is marked, allowing you to quickly identify the nearest options
 Clicking on a marker reveals the supermarket's name, and with a single tap, you can seamlessly launch Google Maps for step-by-step navigation.
 
 
+<img src=https://github.com/AdiFinkelman/EasyShop/assets/126038641/cf62c9fa-5517-4964-bdd2-725322afa30c width="184.5" height="400">
+<img src= https://github.com/AdiFinkelman/EasyShop/assets/126038641/4d9f68cd-022f-49f2-b039-a3efc47e2dca width="184.5" height="400">
+<img src=https://github.com/AdiFinkelman/EasyShop/assets/126038641/ab93d706-4bb9-4672-beff-de4d6ec19db8 width="184.5" height="400">
+<img src=https://github.com/AdiFinkelman/EasyShop/assets/126038641/0f7b8631-25bf-46b7-82c7-aba82e325e94 width="184.5" height="400">
+<img src= https://github.com/AdiFinkelman/EasyShop/assets/126038641/0fe55617-6e6f-4ea3-bea9-9e0f72d152b2 width="184.5" height="400">
+<img src= https://github.com/AdiFinkelman/EasyShop/assets/126038641/411e1419-f13d-4eeb-bfe0-bda133f85c32 width="184.5" height="400">
+
+
 ## Installation
 1. Clone the repository:
 ```bash
@@ -56,6 +67,11 @@ Google Maps API: Harness the capabilities of Google Maps to display nearby super
 
 ## Contributing
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the project's GitHub repository.
+
+## License
+This project is licensed under the MIT License. You are free to modify and distribute this application as per the terms of the license.
+
+Note: The provided source code does not include a valid Google API key. It is essential to obtain your own API key from the Google Cloud Platform console to utilize the Google Maps API functionality
 
 ## Contact
 If you have any questions or need further assistance, please contact the project maintainer:
