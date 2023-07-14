@@ -59,13 +59,28 @@ git clone https://github.com/AdiFinkelman/EasyShop.git
 2. Build and run the application on your preferred Android mobile platform.
 
 ## Technologies Used
-Android Studio: A powerful integrated development environment (IDE) for building Android applications using Java.
+- Android Studio: A powerful integrated development environment (IDE) for building Android applications using Java.
 
-Java: A widely-used programming language known for its versatility and object-oriented approach.
+- Java: A widely-used programming language known for its versatility and object-oriented approach.
 
-Firebase: A reliable cloud-based platform for real-time data storage and synchronization.
+- Firebase: A reliable cloud-based platform for real-time data storage and synchronization.
 
-Google Maps API: Harness the capabilities of Google Maps to display nearby supermarkets and provide seamless navigation.
+- Google Maps API: Harness the capabilities of Google Maps to display nearby supermarkets and provide seamless navigation.
+
+## Known Issues
+**1.** Odd-click behavior with spinner selection for the first two items
+  - Description: When clicking on the spinner for the first two items, which are not initially visible in the initialization fragment, they can only be selected in even clicks and not in odd clicks.
+  - Impact: This issue affects the user experience and may cause confusion or inconvenience when selecting items from the spinner.
+  - Workaround: To select these items, ensure that you click on the spinner twice (even number of clicks).
+  
+**2.** Fragment initialization when choosing an item in the first fragment
+  - Description: When choosing an item in the first fragment, the fragment initializes itself, requiring users to scroll down again to continue selecting items. This initialization is necessary to update the price in the second fragment correctly. However, it can disrupt the user's workflow and cause inconvenience.
+  - Impact: This issue may disrupt the user experience and require additional scrolling to continue selecting items.
+  - Workaround: After selecting an item in the first fragment, scroll down to the second fragment to continue selecting items without interruption.
+
+Please note that we are actively working on addressing these issues and plan to provide fixes and improvements in future updates. We appreciate your understanding and patience. If you encounter any other issues or have suggestions for improvement, please let us know.
+
+
 
 ## Contributing
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the project's GitHub repository.
