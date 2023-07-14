@@ -11,6 +11,8 @@ Say goodbye to the hassle of forgetting items or struggling with paper lists.
 
 Our app provides a seamless and intuitive experience, ensuring that your supermarket visits are efficient, organized, and enjoyable.
 
+Watch the video demonstration on [YouTube](https://youtu.be/qULSS-Dh-RA).
+
 ## Features
 ### 1. User Authentication
 Users can register an account with their email and password. Existing users can log in to access their accounts.
